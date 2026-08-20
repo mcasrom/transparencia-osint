@@ -40,7 +40,7 @@ h1{font-size:1.35em;margin:0;}.sub{color:var(--dim);font-size:0.88em;margin:4px 
 .tab{padding:8px 18px;border-radius:8px 8px 0 0;cursor:pointer;background:var(--panel2);border:1px solid var(--line);border-bottom:none;font-size:0.9em;color:var(--dim);}
 .tab.on{background:var(--panel);color:var(--accent);font-weight:700;border-bottom:2px solid var(--accent);}
 .pane{display:none;}.pane.on{display:block;}
-.filtros{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin:8px 0;}
+.filtros{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;margin:8px 0;}
 .filtros>div{min-width:0;}.filtros label{font-size:0.7em;color:var(--dim);display:block;margin-bottom:2px;}
 .filtros input,.filtros select{width:100%;background:var(--input);border:1px solid var(--line);color:var(--text);border-radius:6px;padding:7px;font-size:0.85em;}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;}
@@ -52,7 +52,7 @@ h1{font-size:1.35em;margin:0;}.sub{color:var(--dim);font-size:0.88em;margin:4px 
 .kp1{background:linear-gradient(135deg,#7f1d1d,#b91c1c);color:#fff;}.kp2{background:linear-gradient(135deg,#1e3a8a,#1d4ed8);color:#fff;}
 .kp3{background:linear-gradient(135deg,#14532d,#15803d);color:#fff;}.kp4{background:linear-gradient(135deg,#713f12,#b45309);color:#fff;}
 .kp5{background:linear-gradient(135deg,#4a044e,#86198f);color:#fff;}.kp6{background:linear-gradient(135deg,#111827,#1f2937);color:#fff;}
-.layout{display:grid;grid-template-columns:1.3fr 1fr;gap:14px;}.layout>*{min-width:0;}
+.layout{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;align-items:start;}.layout>*{min-width:0;}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;}
 .panel h3{margin:0 0 10px;font-size:0.95em;color:var(--accent);}
 .panel select{width:100%;background:var(--input);border:1px solid var(--line);color:var(--text);border-radius:6px;padding:7px;font-size:0.85em;margin-bottom:8px;}
