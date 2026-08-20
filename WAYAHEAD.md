@@ -1,51 +1,28 @@
 # transparencia_osint — WAYAHEAD
 
 ## Objetivo
-Detectar irregularidades en contratación pública española (PLACSP):
-troceado de contratos, concentración por empresa, adjudicaciones récord.
-Filtro por órgano de contratación = "dónde va el dinero en mi municipio".
+"Dónde se gasta el dinero en mi ciudad": contratación pública con filtros y
+detección de anomalías (concentración, troceado).
 
-## Estado (19/Ago)
-- Esqueleto creado (crawler/data/rules/dashboard).
-- Validación de fuentes:
-  - PLACSP: portal OK, sesión OK, pero búsqueda es WebSphere/dojo → reverse-engineering
-    del endpoint de datos (hito crítico, días de trabajo). Fuente legal única.
-  - transparencia.carm.es: Radware captcha → bloqueado.
-  - datos.gob.es API: bloqueado para automatización.
-- Conclusión: el acceso a datos ES el núcleo duro. No es un hito de una sesión.
+## Hecho
+- Motor de ingesta + reglas validado con datos reales (Euskadi, datos.gob.es).
+- Dashboard interactivo v4 en vivo: filtros neutrales, rankings top-10, donut
+  de gasto por tipo, KPIs con impacto, tema claro/oscuro.
+- Fuentes con descarga directa: Euskadi (registro por entidad), Baleares (CSV).
+- Playwright 1.60 + Chromium instalados en el server (para el crawl PLACSP).
+
+## P0 — Crawl PLACSP (LA puerta a toda España, incluida Murcia)
+- Portal contrataciondelestado.es: sesion OK, estructura JSF localizada
+  (form1 + textTexto1 + ViewState + _SUBMIT), pero el boton lo dispara dojo.
+- ENFOQUE ACTUAL: navegador headless (Playwright) — cargar portal, rellenar
+  campo, clicar, capturar resultados. Evita el reverse-engineering del POST.
+- Hito: extraer contratos reales de un organo de Murcia (ej. Ayuntamiento de
+  Murcia) -> validar contra el motor existente.
+- Tras crackear: ingesta masiva de toda Espana (unica fuente completa).
 
 ## Roadmap
-- [ ] P0: crawler PLACSP (sesión + search POST + paginación) — validar 100 contratos reales
-      de un órgano de Murcia. Decidir enfoque: reverse-engineering directo o usar
-      patrón de scrapers comunitarios documentados (GitHub).
-- [ ] P1: DB postgres (contratos, órganos, empresas) + ingesta diaria incremental.
-- [ ] P2: reglas de anomalía: troceado (misma empresa+órgano, <15k/40k, ventana<90d,
-      acumulado cruzando umbral), concentración (>X% de un órgano), velocidad (días).
-- [ ] P3: dashboard visual (gasto por órgano/empresa/CPV, banderas, gráficos).
-- [ ] P4: expansión (BORME propietarios para cruce de familiares — fase 2, sensible).
-
-## Notas
-- Fuente: PLACSP publica contratos de TODAS las entidades públicas (CCAA y
-  ayuntamientos) por la ley de 2019.
-- Alternativa real si PLACSP crawler se atasca: buscar datasets de contratos
-  regionales publicados como open data (no API) en descargas directas.
-
-## Hallazgo P0 (19/Ago) — crawler PLACSP
-- Portal OK, sesion OK (cookies), estructura JSF localizada:
-  form1 + textTexto1 + javax.faces.ViewState/encodedURL + form1_SUBMIT.
-- El POST de texto+_SUBMIT=1 NO ejecuta la busqueda (el boton real lo
-  dispara dojo/JS, no esta en el HTML inicial). Devuelve el portal sin resultados.
-- Siguiente paso: reverse-engineer el valor exacto de form1_SUBMIT / accion
-  (patron de scrapers comunitarios, ej. repos de contratacion en GitHub) o
-  ruta alternativa: datasets descargables de contratos regionales (no API).
-- crawler/placsp_crawl.py = base del intento (sesion + form + POST).
-
-## HITO: pipeline validado con datos reales (19/Ago)
-- Fuente real funcionando: datos.gob.es / Euskadi open data -> XLSX por entidad
-  (columnas: CIF/NIF, Razon social, Tipo contrato, Procedimiento [Contrato Menor],
-  Fecha adjudicacion, Importe, Importe IVA, Poder adjudicador, CPV).
-- Ingesta (ingest.py) + DB sqlite (transparencia.db) + reglas (rules/transp_rules.py):
-  troceado (misma CIF+poder, <15k c/u, suma>15k, ventana 90d) y concentracion.
-- Validado: 11 contratos reales de Bilbao Zerbitzuak ingeridos, reglas ejecutan OK.
-- COBERTURA: Euskadi publica en datos.gob.es; MURCIA (objetivo real) publica via PLACSP
-  (crawl pendiente P0). Para mas volumen: ingerir mas XLSX de Euskadi/otros.
+- [ ] P0: crawl PLACSP con Playwright -> datos de Murcia/Espana.
+- [ ] P1: integracion Baleares/Valencia/CyL/Cantabria (descarga directa).
+- [ ] P2: mejor troceado (usar importes + fechas cuando existan).
+- [ ] P3: dedup de entidades y nombres.
+- [ ] P4: BORME para cruce de propietarios/familiares (sensible, fase 2).
