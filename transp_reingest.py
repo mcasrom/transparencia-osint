@@ -58,7 +58,7 @@ def main():
             fn = DATA / f"d_{i}.xlsx"
             fn.write_bytes(data)
             name = real_name(cat.split("/")[-1])
-            subprocess.run([sys.executable, str(BASE / "ingest.py"), str(fn), name], capture_output=True)
+            subprocess.run([sys.executable, str(BASE / "ingest.py"), str(fn), name, "Euskadi"], capture_output=True)
             ing += 1
             print(f"  {name[:45]} ({len(data)}b)")
         except Exception as e:
