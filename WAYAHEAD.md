@@ -39,3 +39,13 @@ Filtro por órgano de contratación = "dónde va el dinero en mi municipio".
   (patron de scrapers comunitarios, ej. repos de contratacion en GitHub) o
   ruta alternativa: datasets descargables de contratos regionales (no API).
 - crawler/placsp_crawl.py = base del intento (sesion + form + POST).
+
+## HITO: pipeline validado con datos reales (19/Ago)
+- Fuente real funcionando: datos.gob.es / Euskadi open data -> XLSX por entidad
+  (columnas: CIF/NIF, Razon social, Tipo contrato, Procedimiento [Contrato Menor],
+  Fecha adjudicacion, Importe, Importe IVA, Poder adjudicador, CPV).
+- Ingesta (ingest.py) + DB sqlite (transparencia.db) + reglas (rules/transp_rules.py):
+  troceado (misma CIF+poder, <15k c/u, suma>15k, ventana 90d) y concentracion.
+- Validado: 11 contratos reales de Bilbao Zerbitzuak ingeridos, reglas ejecutan OK.
+- COBERTURA: Euskadi publica en datos.gob.es; MURCIA (objetivo real) publica via PLACSP
+  (crawl pendiente P0). Para mas volumen: ingerir mas XLSX de Euskadi/otros.
