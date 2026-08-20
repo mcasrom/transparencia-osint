@@ -16,7 +16,7 @@ rows = conn.execute(
 data = [{"poder": r["poder"], "empresa": r["razon_social"], "cif": r["cif"], "tipo": r["tipo_contrato"] or "?",
          "proc": r["procedimiento"] or "?", "importe": r["importe"], "fecha": r["fecha_adjudicacion"] or "",
          "cpv": r["cpv"] or "", "ccaa": "Euskadi"} for r in rows]
-hoy = datetime.date.today().isoformat()
+hoy = datetime.datetime.now().strftime("%d/%m/%Y %H:%M") + " UTC"
 
 html = f"""<!doctype html>
 <html lang="es" data-theme="dark">
