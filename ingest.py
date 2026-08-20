@@ -35,6 +35,7 @@ def parse_date(v):
 
 def ingest(xlsx, poder):
     df = pd.read_excel(xlsx, sheet_name="Catalogo contratos", header=5)
+    df.columns = [str(c).strip() for c in df.columns]
     df = df.dropna(subset=["Razón social"])
     conn = sqlite3.connect(DB)
     conn.execute("""CREATE TABLE IF NOT EXISTS contratos (

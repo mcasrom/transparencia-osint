@@ -30,8 +30,7 @@ def detect_troceado(conn):
                 if dias > 90:
                     break
                 a, b = items[i], items[j]
-                menores = (a["procedimiento"] and "menor" in a["procedimiento"].lower()) or (b["procedimiento"] and "menor" in b["procedimiento"].lower())
-                if menores and a["importe"] <= LIMITE_MENOR_SERVICIOS and b["importe"] <= LIMITE_MENOR_SERVICIOS and a["importe"] + b["importe"] > LIMITE_MENOR_SERVICIOS:
+                if a["importe"] < LIMITE_MENOR_SERVICIOS and b["importe"] < LIMITE_MENOR_SERVICIOS and a["importe"] + b["importe"] > LIMITE_MENOR_SERVICIOS:
                     flags.append((cif, poder, a["razon"], a["fecha"].date(), a["importe"], b["fecha"].date(), b["importe"]))
     return flags
 
