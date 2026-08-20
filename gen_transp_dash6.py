@@ -150,7 +150,7 @@ svg{max-width:100%;height:auto;}
     Candidatos a revisar, no acusaciones.
   </div>
   <div class="chips" id="anomChips">
-    <span class="chip on" data-ccaa="" onclick="chipCcaa(this)">Todas</span>
+    <span class="chip on" data-ccaa="" onclick="setChip(this)">Todas</span>
   </div>
   <div class="kpis">
     <div class="kpi kp5"><div class="n" id="aConc">0</div><div class="l">empresas en concentración</div></div>
@@ -188,14 +188,14 @@ function apply(){const out=filtros();lastOut=out;const nConc=out.filter(x=>anomO
 function renderTable(){const out=lastOut;document.getElementById('tbody').innerHTML=out.slice(0,shown).map(x=>{const c=x.c,a=anomOf(x.i);const lbl=(a.includes('troc')?'<span class="badge b-troc">troc</span>':'')+(a.includes('conc')?'<span class="badge b-conc">conc</span>':'');return`<tr class="${a.includes('conc')?'conc':''} ${a.includes('troc')?'troc':''}"><td>${esc(c.poder)}</td><td>${esc(c.empresa)}</td><td>${fmt(c.importe)}</td><td>${esc(c.fecha)}</td><td>${esc(c.ccaa)}</td><td>${lbl}</td></tr>`;}).join('')||'<tr><td colspan="6">Sin resultados.</td></tr>';document.getElementById('moreBtn').style.display=out.length>shown?'':'none';}
 function moreRows(){shown+=20;renderTable();}
 function renderAnom(){document.getElementById('aConc').textContent=fmtN(concKeys.size);document.getElementById('aTroc').textContent=fmtN(Object.keys(trocGroup).length);const tg=Object.entries(trocGroup).filter(([k,g])=>!chipCcaa||g.ccaa===chipCcaa).sort((a,b)=>b[1].sum-a[1].sum).slice(0,60);document.getElementById('trocGroup').innerHTML=tg.map(([k,g])=>`<div style="margin:5px 0;padding:6px 8px;background:rgba(245,158,11,.08);border-left:3px solid var(--amber);border-radius:6px;">✂️ <b>${esc(g.empresa)}</b> · ${esc(g.poder)} — <b>${g.pairs}</b> pares · suma <b>${fmt(g.sum)}</b> <span style="color:var(--dim);font-size:0.75em;">(${esc(g.ccaa)})</span></div>`).join('')||'Sin casos.';const cl=[...concKeys].map(k=>{const c=DATA.find(x=>x.cif+'|'+x.poder===k);return{c,n:cnt[k]};}).filter(x=>!chipCcaa||x.c.ccaa===chipCcaa).sort((a,b)=>b.n-a.n).slice(0,60);document.getElementById('concList').innerHTML=cl.map(x=>`<div style="margin:4px 0;">🚨 <b>${esc(x.c.empresa)}</b> → ${esc(x.c.poder)} · <b>${x.n}</b> menores <span style="color:var(--dim);font-size:0.75em;">(${esc(x.c.ccaa)})</span></div>`).join('')||'Sin casos.';}
-function chipCcaa(el){chipCcaa=el.dataset.ccaa;document.querySelectorAll('#anomChips .chip').forEach(c=>c.className='chip'+(c===el?' on':''));renderAnom();}
+function setChip(el){chipCcaa=el.dataset.ccaa;document.querySelectorAll('#anomChips .chip').forEach(c=>c.className='chip'+(c===el?' on':''));renderAnom();}
 function tab(name){document.getElementById('tabDatos').className='tab'+(name==='datos'?' on':'');document.getElementById('tabAnom').className='tab'+(name==='anomalias'?' on':'');document.getElementById('paneDatos').className='pane'+(name==='datos'?' on':'');document.getElementById('paneAnom').className='pane'+(name==='anomalias'?' on':'');if(name==='anomalias')renderAnom();}
 function exportCSV(){if(!lastOut.length)return;const head=['Entidad','Empresa','CIF','Importe','Fecha','Tipo','Procedimiento','CPV','CCAA','Anomalia'];const rows=lastOut.map(x=>{const c=x.c,a=anomOf(x.i);return[c.poder,c.empresa,c.cif,c.importe??'',c.fecha,c.tipo,c.proc,c.cpv,c.ccaa,a||''];});const csv='\ufeff'+[head,...rows].map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')).join('\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='transparencia_osint.csv';a.click();}
 function toggleTheme(){const el=document.documentElement,btn=document.getElementById('themeBtn');const d=el.getAttribute('data-theme')==='dark';el.setAttribute('data-theme',d?'light':'dark');btn.textContent=d?'🌙 Oscuro':'☀️ Claro';}
 fill('fEnt',c=>c.poder);fill('fEmp',c=>c.empresa);fill('fTipo',c=>c.tipo);fill('fProc',c=>c.proc);fill('fCcaa',c=>c.ccaa);
 const years=[...new Set(DATA.map(c=>c.fecha?c.fecha.slice(0,4):'')).filter(Boolean)].sort();
 document.getElementById('fYear').innerHTML='<option value="">Todos</option>'+years.map(y=>`<option>${y}</option>`).join('');
-[...new Set(DATA.map(c=>c.ccaa))].filter(Boolean).forEach(c=>{const s=document.createElement('span');s.className='chip';s.textContent=c;s.dataset.ccaa=c;s.onclick=()=>chipCcaa(s);document.getElementById('anomChips').appendChild(s);});
+[...new Set(DATA.map(c=>c.ccaa))].filter(Boolean).forEach(c=>{const s=document.createElement('span');s.className='chip';s.textContent=c;s.dataset.ccaa=c;s.onclick=()=>setChip(s);document.getElementById('anomChips').appendChild(s);});
 ['q','fEnt','fEmp','fTipo','fProc','fYear','fMin','fMax','fCcaa','fAnom','fMinN'].forEach(id=>document.getElementById(id).addEventListener(id==='q'?'input':'change',apply));
 document.getElementById('rankSel').addEventListener('change',apply);
 document.getElementById('reset').onclick=()=>{['q','fEnt','fEmp','fTipo','fProc','fYear','fMin','fMax','fCcaa','fAnom','fMinN'].forEach(id=>document.getElementById(id).value='');apply();};
