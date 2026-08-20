@@ -29,3 +29,13 @@ Filtro por órgano de contratación = "dónde va el dinero en mi municipio".
   ayuntamientos) por la ley de 2019.
 - Alternativa real si PLACSP crawler se atasca: buscar datasets de contratos
   regionales publicados como open data (no API) en descargas directas.
+
+## Hallazgo P0 (19/Ago) — crawler PLACSP
+- Portal OK, sesion OK (cookies), estructura JSF localizada:
+  form1 + textTexto1 + javax.faces.ViewState/encodedURL + form1_SUBMIT.
+- El POST de texto+_SUBMIT=1 NO ejecuta la busqueda (el boton real lo
+  dispara dojo/JS, no esta en el HTML inicial). Devuelve el portal sin resultados.
+- Siguiente paso: reverse-engineer el valor exacto de form1_SUBMIT / accion
+  (patron de scrapers comunitarios, ej. repos de contratacion en GitHub) o
+  ruta alternativa: datasets descargables de contratos regionales (no API).
+- crawler/placsp_crawl.py = base del intento (sesion + form + POST).
