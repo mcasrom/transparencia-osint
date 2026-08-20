@@ -62,13 +62,13 @@ a {{ color:var(--cyan);}}
 .panel h3 {{ margin:0 0 10px;font-size:0.95em;color:var(--accent);}}
 .panel select {{ width:100%;background:var(--input);border:1px solid var(--line);color:var(--text);border-radius:6px;padding:7px;font-size:0.85em;margin-bottom:8px;}}
 table {{ width:100%;border-collapse:collapse;font-size:0.78em;table-layout:fixed;}}
-th,td {{ text-align:left;padding:5px 7px;border-bottom:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;}}
+th,td {{ text-align:left;padding:5px 7px;border-bottom:1px solid var(--line);max-width:340px;word-wrap:break-word;}}
 th {{ color:var(--dim);position:sticky;top:0;background:var(--panel);}}
 tr.anom {{ background:rgba(220,38,38,.18); }}
 .cont {{ max-height:430px;overflow:auto;border:1px solid var(--line);border-radius:8px;}}
 .rank {{ font-size:0.85em;}}
 .rank .row {{ display:flex;align-items:center;gap:8px;margin:5px 0;}}
-.rank .lab {{ min-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:0.85em;}}
+.rank .lab {{ min-width:240px;font-size:0.85em;word-wrap:break-word;}}
 .rank .bar {{ height:16px;border-radius:4px;background:linear-gradient(90deg,var(--red),var(--accent));}}
 svg {{ max-width:100%;height:auto; }}
 .met {{ font-size:0.72em;color:var(--dim);border-top:1px solid var(--line);margin-top:16px;padding-top:10px;}}
