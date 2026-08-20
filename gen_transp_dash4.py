@@ -37,7 +37,7 @@ html = f"""<!doctype html>
   --dim:#5b6b84; --accent:#d9820a; --red:#dc4c4c; --green:#0e9f6e; --cyan:#0e9fae; --input:#ffffff;
 }}
 * {{ box-sizing:border-box; }}
-body {{ font-family:-apple-system,'Inter',sans-serif;background:var(--bg);color:var(--text);max-width:1150px;margin:0 auto;padding:18px;line-height:1.5;transition:background .3s,color .3s;}}
+body {{ font-family:-apple-system,'Inter',sans-serif;background:var(--bg);color:var(--text);max-width:1150px;margin:0 auto;padding:18px;line-height:1.5;transition:background .3s,color .3s;overflow-x:hidden;}}
 h1 {{ font-size:1.35em;margin:0;}} .sub {{ color:var(--dim);font-size:0.88em;margin:4px 0 12px;}}
 a {{ color:var(--cyan);}}
 .top {{ display:flex;justify-content:space-between;align-items:center;gap:10px;}}
@@ -56,10 +56,12 @@ a {{ color:var(--cyan);}}
 .kp4 {{ background:linear-gradient(135deg,#713f12,#b45309);color:#fff;}}
 .kp5 {{ background:linear-gradient(135deg,#4a044e,#86198f);color:#fff;}}
 .layout {{ display:grid;grid-template-columns:1.3fr 1fr;gap:14px;}}
+.layout > * {{ min-width:0; }}
+.filtros > div {{ min-width:0; }}
 .panel {{ background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;}}
 .panel h3 {{ margin:0 0 10px;font-size:0.95em;color:var(--accent);}}
 .panel select {{ width:100%;background:var(--input);border:1px solid var(--line);color:var(--text);border-radius:6px;padding:7px;font-size:0.85em;margin-bottom:8px;}}
-table {{ width:100%;border-collapse:collapse;font-size:0.78em;}}
+table {{ width:100%;border-collapse:collapse;font-size:0.78em;table-layout:fixed;}}
 th,td {{ text-align:left;padding:5px 7px;border-bottom:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;}}
 th {{ color:var(--dim);position:sticky;top:0;background:var(--panel);}}
 tr.anom {{ background:rgba(220,38,38,.18); }}
@@ -68,6 +70,7 @@ tr.anom {{ background:rgba(220,38,38,.18); }}
 .rank .row {{ display:flex;align-items:center;gap:8px;margin:5px 0;}}
 .rank .lab {{ min-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:0.85em;}}
 .rank .bar {{ height:16px;border-radius:4px;background:linear-gradient(90deg,var(--red),var(--accent));}}
+svg {{ max-width:100%;height:auto; }}
 .met {{ font-size:0.72em;color:var(--dim);border-top:1px solid var(--line);margin-top:16px;padding-top:10px;}}
 .donut-wrap {{ text-align:center; }}
 </style>
