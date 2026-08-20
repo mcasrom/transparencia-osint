@@ -18,7 +18,7 @@ data = [{"poder": r["poder"], "empresa": r["razon_social"], "cif": r["cif"], "ti
          "cpv": r["cpv"] or "", "ccaa": r["ccaa"] or "?"} for r in rows]
 hoy = datetime.datetime.now().strftime("%d/%m/%Y %H:%M") + " UTC"
 
-T = """<!doctype html>
+T = r"""<!doctype html>
 <html lang="es" data-theme="dark">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
