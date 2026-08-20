@@ -193,7 +193,7 @@ function tab(name){document.getElementById('tabDatos').className='tab'+(name==='
 function exportCSV(){if(!lastOut.length)return;const head=['Entidad','Empresa','CIF','Importe','Fecha','Tipo','Procedimiento','CPV','CCAA','Anomalia'];const rows=lastOut.map(x=>{const c=x.c,a=anomOf(x.i);return[c.poder,c.empresa,c.cif,c.importe??'',c.fecha,c.tipo,c.proc,c.cpv,c.ccaa,a||''];});const csv='\ufeff'+[head,...rows].map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')).join('\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='transparencia_osint.csv';a.click();}
 function toggleTheme(){const el=document.documentElement,btn=document.getElementById('themeBtn');const d=el.getAttribute('data-theme')==='dark';el.setAttribute('data-theme',d?'light':'dark');btn.textContent=d?'🌙 Oscuro':'☀️ Claro';}
 fill('fEnt',c=>c.poder);fill('fEmp',c=>c.empresa);fill('fTipo',c=>c.tipo);fill('fProc',c=>c.proc);fill('fCcaa',c=>c.ccaa);
-const years=[...new Set(DATA.map(c=>c.fecha?c.fecha.slice(0,4):'')).filter(Boolean)].sort();
+const years=[...new Set(DATA.map(c=>c.fecha?c.fecha.slice(0,4):''))].filter(Boolean).sort();
 document.getElementById('fYear').innerHTML='<option value="">Todos</option>'+years.map(y=>`<option>${y}</option>`).join('');
 [...new Set(DATA.map(c=>c.ccaa))].filter(Boolean).forEach(c=>{const s=document.createElement('span');s.className='chip';s.textContent=c;s.dataset.ccaa=c;s.onclick=()=>setChip(s);document.getElementById('anomChips').appendChild(s);});
 ['q','fEnt','fEmp','fTipo','fProc','fYear','fMin','fMax','fCcaa','fAnom','fMinN'].forEach(id=>document.getElementById(id).addEventListener(id==='q'?'input':'change',apply));
