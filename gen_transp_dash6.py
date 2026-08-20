@@ -175,7 +175,7 @@ const concKeys=new Set(),trocIdxs=new Set(),trocGroup={},cnt={},trocByKey={};
 DATA.forEach((c,i)=>{if(c.proc&&c.proc.toLowerCase().includes('menor')){const k=c.cif+'|'+c.poder;cnt[k]=(cnt[k]||0)+1;}});
 Object.entries(cnt).forEach(([k,n])=>{if(n>=5)concKeys.add(k);});
 const grupos={};
-DATA.forEach((c,i)=>{if(c.importe!=null&&c.fecha){const k=c.cif+'|'+c.poder;(grupos[k]=grupos[k]||[]).push({i,f:new Date(c.fecha),im:c.importe});}});
+DATA.forEach((c,i)=>{if(c.importe!=null&&c.fecha){const f=new Date(c.fecha);if(!isNaN(f)){const k=c.cif+'|'+c.poder;(grupos[k]=grupos[k]||[]).push({i,f,im:c.importe});}}});
 for(const[k,arr]of Object.entries(grupos)){arr.sort((a,b)=>a.f-b.f);let pairs=0,sum=0;for(let i=0;i<arr.length;i++)for(let j=i+1;j<arr.length;j++){const dias=(arr[j].f-arr[i].f)/86400000;if(dias>WINDOW)break;if(arr[i].im<LIM&&arr[j].im<LIM&&arr[i].im+arr[j].im>LIM){trocIdxs.add(arr[i].i);trocIdxs.add(arr[j].i);pairs++;sum+=arr[i].im+arr[j].im;}}if(pairs>0){const c=DATA[arr[0].i];trocGroup[k]={empresa:c.empresa,cif:c.cif,poder:c.poder,ccaa:c.ccaa,pairs,sum};}}
 const anomOf=i=>(concKeys.has(DATA[i].cif+'|'+DATA[i].poder)?'conc':'')+(trocIdxs.has(i)?'troc':'');
 let shown=20,chipCcaa='';
