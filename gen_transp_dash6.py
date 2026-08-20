@@ -70,6 +70,7 @@ svg{max-width:100%;height:auto;}
 .narr b{color:var(--accent);}.badge{border-radius:6px;padding:1px 7px;font-size:0.7em;color:#fff;}
 .b-conc{background:#dc2626;}.b-troc{background:#d97706;}
 .more{width:100%;margin-top:8px;padding:8px;border:1px dashed var(--line);border-radius:8px;background:var(--panel2);color:var(--text);cursor:pointer;}
+.sec{font-size:1.05em;font-weight:700;color:var(--accent);margin:22px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--line);}
 </style>
 </head>
 <body>
@@ -100,6 +101,8 @@ svg{max-width:100%;height:auto;}
   </div>
 
   <div class="kpis">
+    <div class="sec">📈 Resumen</div>
+  <div class="kpis">
     <div class="kpi kp1"><div class="ic">📑</div><div class="n" id="kTotal">0</div><div class="l">contratos</div></div>
     <div class="kpi kp2"><div class="ic">💰</div><div class="n" id="kSuma">0 €</div><div class="l">gasto</div></div>
     <div class="kpi kp3"><div class="ic">🏭</div><div class="n" id="kEmp">0</div><div class="l">empresas</div></div>
@@ -108,6 +111,7 @@ svg{max-width:100%;height:auto;}
     <div class="kpi kp6"><div class="ic">✂️</div><div class="n" id="kTroc">0</div><div class="l">troceado</div></div>
   </div>
 
+  <div class="sec">📊 Análisis</div>
   <div class="layout">
     <div class="panel">
       <h3>📊 Ranking Top 10</h3>
@@ -120,16 +124,20 @@ svg{max-width:100%;height:auto;}
         <option value="proc">Gasto por procedimiento</option>
       </select>
       <div id="rankBox" class="rank"></div>
-      <h3 style="margin-top:14px;">🥧 Gasto por tipo</h3>
-      <div id="donutWrap" style="text-align:center;"></div>
     </div>
     <div class="panel">
-      <h3>🏷️ Detalle</h3>
-      <div class="cont"><table><thead><tr><th>Entidad</th><th>Empresa</th><th>Importe</th><th>Fecha</th><th>CCAA</th><th>Anom</th></tr></thead><tbody id="tbody"></tbody></table></div>
+      <h3>🥧 Gasto por tipo</h3>
+      <div id="donutWrap" style="text-align:center;"></div>
+    </div>
+  </div>
+
+  <div class="sec">🏷️ Detalle</div>
+  <div class="panel">
+    <h3>Registros (filtrados)</h3>
+    <div class="cont"><table><thead><tr><th>Entidad</th><th>Empresa</th><th>Importe</th><th>Fecha</th><th>CCAA</th><th>Anom</th></tr></thead><tbody id="tbody"></tbody></table></div>
       <button class="more" id="moreBtn" onclick="moreRows()">Ver más ↓</button>
     </div>
   </div>
-</div>
 
 <div class="pane" id="paneAnom">
   <div class="narr">
