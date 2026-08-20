@@ -26,3 +26,10 @@ detección de anomalías (concentración, troceado).
 - [ ] P2: mejor troceado (usar importes + fechas cuando existan).
 - [ ] P3: dedup de entidades y nombres.
 - [ ] P4: BORME para cruce de propietarios/familiares (sensible, fase 2).
+
+## Hallazgo S1 (20/Ago)
+- Baleares INGERIDO (7010 empresas, formato agregado). Filtro comunidad: Euskadi + Illes Balears.
+- Valencia (dadesobertes.gva.es): bloqueada desde el server (timeout, IP de datacenter bloqueada) -> descarga con navegador del usuario.
+- Cataluña (dadesobertes.gencat.cat): portal reestructurado, API CKAN desaparecida -> requiere navegar el nuevo portal.
+- CONCLUSION: la expansion regional por descarga directa tiene limite (portales hostiles/bloqueados).
+  El crawl PLACSP (S2) es la unica via completa a Valencia/Cataluna/Madrid/Murcia.
