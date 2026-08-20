@@ -125,7 +125,7 @@ svg {{ max-width:100%;height:auto; }}
 </div>
 
 <div class="met">
-<b>Metodología y fuentes:</b> datos oficiales abiertos de contratación (datos.gob.es): Euskadi (registro por entidad) + Baleares (adjudicatarios) + Valencia (pendiente). Reglas: <b>concentración</b> = empresa con ≥5 contratos menores a una misma entidad; <b>troceado</b> = misma empresa+entidad, &lt;15.000 € c/u sumando &gt;15.000 € en 90 días. <b>Cobertura actual: Euskadi + Baleares</b> — Murcia vía PLACSP pendiente. Los datos requieren verificación.
+<b>Metodología y fuentes:</b> datos oficiales abiertos de contratación (datos.gob.es): Euskadi (registro por entidad) + Baleares (adjudicatarios) + Valencia (pendiente). Reglas: <b>concentración</b> = empresa con ≥5 contratos menores a una misma entidad; <b>troceado</b> = misma empresa+entidad, &lt;15.000 € c/u sumando &gt;15.000 € en 90 días. <b>Cobertura: Euskadi, Illes Balears y Región de Murcia (CARM 2023, contratos menores)</b>. Resto de CCAA pendientes (buscar dataset regional o PLACSP). Los datos requieren verificación.
 <br>© <a href="https://www.viajeinteligencia.com/">Viaje Inteligencia</a> · <a href="mailto:nearme@viajeinteligencia.com">contacto</a>
 </div>
 

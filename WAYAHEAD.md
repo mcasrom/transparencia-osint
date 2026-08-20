@@ -5,10 +5,10 @@
 detección de anomalías (concentración, troceado).
 
 ## Hecho
-- Motor de ingesta + reglas validado con datos reales (Euskadi, datos.gob.es).
-- Dashboard interactivo v4 en vivo: filtros neutrales, rankings top-10, donut
-  de gasto por tipo, KPIs con impacto, tema claro/oscuro.
-- Fuentes con descarga directa: Euskadi (registro por entidad), Baleares (CSV).
+- Motor validado: Euskadi, Illes Balears, Región de Murcia (CARM 2023). Troceado operativo.
+- Dashboard interactivo v4 en vivo: filtros, rankings, donut, KPIs, claro/oscuro, gzip.
+- Fuentes con descarga directa: Euskadi, Baleares, CARM (contratos menores 2023).
+  PATRON: buscar en datos.gob.es el dataset regional de contratos menores.
 - Playwright 1.60 + Chromium instalados en el server (para el crawl PLACSP).
 
 ## P0 — Crawl PLACSP (LA puerta a toda España, incluida Murcia)

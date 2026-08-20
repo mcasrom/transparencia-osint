@@ -4,7 +4,7 @@ Detectar irregularidades en la contratación pública española a partir de dato
 oficiales abiertos. El usuario decide los criterios (filtros), no la herramienta.
 
 ## Qué hace
-- Ingiere contratos públicos reales (datos.gob.es: Euskadi, Baleares...).
+- Ingiere contratos públicos reales (datos.gob.es + portales regionales de datos abiertos).
 - Dashboard interactivo en https://transparencia.viajeinteligencia.com
   (filtros por entidad/empresa/tipo/importe + rankings + donut + claro/oscuro).
 - Reglas de anomalía (opcional, como filtro):
@@ -12,7 +12,7 @@ oficiales abiertos. El usuario decide los criterios (filtros), no la herramienta
   - Troceado: misma empresa+entidad, contratos <15k que suman >15k en 90 días.
 
 ## Estado
-- Motor validado con datos reales (1.847 contratos Euskadi).
+- Motor validado con datos reales: Euskadi, Illes Balears y Región de Murcia (21.313 contratos menores CARM 2023). Regla de troceado disparando.
 - Dashboard v4 en vivo (claro/oscuro, KPIs impacto, rankings, donut).
 - PENDIENTE: crawl PLACSP (la puerta a toda España, incluida Murcia).
 
