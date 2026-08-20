@@ -138,6 +138,7 @@ svg{max-width:100%;height:auto;}
       <button class="more" id="moreBtn" onclick="moreRows()">Ver más ↓</button>
     </div>
   </div>
+</div>
 
 <div class="pane" id="paneAnom">
   <div class="narr">
